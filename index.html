@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>李东亮 | Brand Manager & Designer</title>
+    <title>LI DONGLIANG | BRAND DIRECTOR</title>
+    
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="icon" href="favicon.png" type="image/png">
+    
     <style>
-        /* 基础样式 */
+        /* 1. 基础容器：彻底裁切溢出部分 */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -15,87 +17,103 @@
             width: 100%;
             overflow: hidden; 
             background-color: #000; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* 使用系统级衬线体，营造时尚感 */
+            font-family: "Optima", "Georgia", "Times New Roman", serif;
         }
 
-        /* Framer 容器 */
+        /* 2. 核心遮挡逻辑：让窗口比屏幕大，并向下偏移，把底部标挤走 */
+        #content-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* 关键：剪裁掉多余部分 */
+        }
+
         iframe { 
             width: 100%; 
-            height: 100%; 
+            /* 让网页高度多出 60 像素 */
+            height: calc(100% + 60px); 
             border: none; 
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1; /* 放在底层 */
+            /* 向下推一点点，确保底部标彻底消失 */
+            margin-top: -5px; 
+            z-index: 1;
         }
 
-        /* ==============================
-           高级开屏动画样式
-           ============================== */
+        /* 3. 时尚开屏动画 */
         #splash-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #000; /* 纯黑背景 */
+            background-color: #000;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999; /* 确保在最顶层 */
-            /* 定义整体退场动画：2.5秒后开始，持续1秒，缓动上滑 */
-            animation: fadeOutUpSlide 1s cubic-bezier(0.65, 0.05, 0.36, 1) 2.5s forwards; 
+            z-index: 9999;
+            /* 离场动画：先慢后快的抽离感 */
+            animation: curtainUp 1.4s cubic-bezier(0.8, 0, 0.2, 1) 3s forwards;
         }
 
         #splash-text {
             color: #fff;
-            font-size: 24px;
-            font-weight: 300; /* 纤细字体更高级 */
-            letter-spacing: 4px; /* 加大字间距 */
+            font-size: 14px; /* 小字号更显高级 */
+            font-weight: 300;
+            letter-spacing: 0.8em; /* 极宽字间距 */
+            text-transform: uppercase;
             opacity: 0;
-            transform: translateY(20px); /* 初始位置偏下 */
-            /* 定义文字拉入动画：持续1.5秒，缓动，无限呼吸感 */
-            animation: fadeInReveal 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards,
-                       textPulse 3s ease-in-out 2s infinite; 
+            filter: blur(10px); /* 初始模糊 */
+            
+            /* 文字显现动画：模糊变清晰 */
+            animation: blurReveal 2s cubic-bezier(0.2, 0, 0.2, 1) 0.5s forwards;
         }
 
-        /* --- 动画关键帧定义 --- */
-
-        /* 1. 文字由下而上，由隐转现 */
-        @keyframes fadeInReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+            margin-top: 20px;
+            transform: scaleX(0);
+            animation: lineGrow 1.5s ease 1s forwards;
         }
 
-        /* 2. 文字柔和的呼吸感 */
-        @keyframes textPulse {
-            0%, 100% { opacity: 1; text-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            50% { opacity: 0.8; text-shadow: 0 0 15px rgba(255,255,255,0.3); }
+        /* --- 动画关键帧 --- */
+
+        /* 文字从模糊到清晰 */
+        @keyframes blurReveal {
+            0% { opacity: 0; filter: blur(10px); transform: scale(0.95); }
+            100% { opacity: 1; filter: blur(0); transform: scale(1); }
         }
 
-        /* 3. 整体开屏丝滑上滑退场 */
-        @keyframes fadeOutUpSlide {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100%); /* 向上滑动出一个屏幕的高度 */
-                opacity: 0;
-                visibility: hidden; /* 彻底隐藏，不影响下方交互 */
-            }
+        /* 装饰线拉伸 */
+        @keyframes lineGrow {
+            to { transform: scaleX(1); }
         }
+
+        /* 幕布向上滑出 */
+        @keyframes curtainUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); visibility: hidden; }
+        }
+
     </style>
 </head>
 <body>
     
     <div id="splash-screen">
-        <div id="splash-text">李东亮 | BRAND & DESIGN</div>
+        <div id="splash-text">LI DONGLIANG PORTFOLIO</div>
+        <div class="line"></div>
     </div>
 
-    <iframe src="https://lidongliang.framer.website/"></iframe>
+    <div id="content-wrapper">
+        <iframe src="https://lidongliang.framer.website/"></iframe>
+    </div>
 
 </body>
 </html>
