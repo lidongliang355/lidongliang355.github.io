@@ -15,14 +15,26 @@
             overflow: hidden; 
             background-color: #000; 
         }
+        /* 这里的原理是：让窗户比屏幕高一点点，把底部的标挤走 */
+        .container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
         iframe { 
             width: 100%; 
-            height: 100%; 
-            border: none; 
+            height: calc(100% + 50px); /* 让高度多出50像素 */
+            border: none;
+            margin-bottom: -50px; /* 把多出的部分藏在下面 */
         }
     </style>
 </head>
 <body>
-    <iframe src="https://lidongliang.framer.website/"></iframe>
+    <div class="container">
+        <iframe src="https://lidongliang.framer.website/"></iframe>
+    </div>
 </body>
 </html>
