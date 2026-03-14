@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="icon" href="favicon.png" type="image/png">
     <style>
+        /* 基础样式 */
         body, html { 
             margin: 0; 
             padding: 0; 
@@ -14,27 +15,87 @@
             width: 100%;
             overflow: hidden; 
             background-color: #000; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        /* 这里的原理是：让窗户比屏幕高一点点，把底部的标挤走 */
-        .container {
+
+        /* Framer 容器 */
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
             position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* 放在底层 */
+        }
+
+        /* ==============================
+           高级开屏动画样式
+           ============================== */
+        #splash-screen {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            background-color: #000; /* 纯黑背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* 确保在最顶层 */
+            /* 定义整体退场动画：2.5秒后开始，持续1秒，缓动上滑 */
+            animation: fadeOutUpSlide 1s cubic-bezier(0.65, 0.05, 0.36, 1) 2.5s forwards; 
         }
-        iframe { 
-            width: 100%; 
-            height: calc(100% + 50px); /* 让高度多出50像素 */
-            border: none;
-            margin-bottom: -50px; /* 把多出的部分藏在下面 */
+
+        #splash-text {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 300; /* 纤细字体更高级 */
+            letter-spacing: 4px; /* 加大字间距 */
+            opacity: 0;
+            transform: translateY(20px); /* 初始位置偏下 */
+            /* 定义文字拉入动画：持续1.5秒，缓动，无限呼吸感 */
+            animation: fadeInReveal 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards,
+                       textPulse 3s ease-in-out 2s infinite; 
+        }
+
+        /* --- 动画关键帧定义 --- */
+
+        /* 1. 文字由下而上，由隐转现 */
+        @keyframes fadeInReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 2. 文字柔和的呼吸感 */
+        @keyframes textPulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+            50% { opacity: 0.8; text-shadow: 0 0 15px rgba(255,255,255,0.3); }
+        }
+
+        /* 3. 整体开屏丝滑上滑退场 */
+        @keyframes fadeOutUpSlide {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%); /* 向上滑动出一个屏幕的高度 */
+                opacity: 0;
+                visibility: hidden; /* 彻底隐藏，不影响下方交互 */
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <iframe src="https://lidongliang.framer.website/"></iframe>
+    
+    <div id="splash-screen">
+        <div id="splash-text">李东亮 | BRAND & DESIGN</div>
     </div>
+
+    <iframe src="https://lidongliang.framer.website/"></iframe>
+
 </body>
 </html>
