@@ -1,223 +1,494 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>DESIGN PORTFOLIO · LI DONGLIANG</title>
-<style>
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-body {
-background: #0b0b0d;
-color: #eaeaea;
-font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
-overflow-x: hidden;
-cursor: default;
-}
-/* 背景光 */
-.bg-light {
-position: fixed;
-width: 800px;
-height: 800px;
-background: radial-gradient(circle, rgba(255,110,0,0.15), transparent 70%);
-top: -400px;
-left: -400px;
-pointer-events: none;
-z-index: 0;
-animation: move 20s infinite alternate ease-in-out;
-}
-@keyframes move {
-0% { transform: translate(0,0); }
-100% { transform: translate(60vw, 40vh); }
-}
-/* 头部 */
-header {
-position: fixed;
-top: 0;
-width: 100%;
-padding: 24px 6vw;
-display: flex;
-justify-content: space-between;
-align-items: center;
-z-index: 99;
-mix-blend-mode: difference;
-}
-.logo {
-font-size: 20px;
-letter-spacing: 2px;
-font-weight: 600;
-color: #fff;
-}
-/* 主容器 */
-.container {
-padding: 140px 6vw 100px;
-max-width: 1400px;
-margin: 0 auto;
-position: relative;
-z-index: 1;
-}
-/* 标题区 */
-.hero {
-margin-bottom: 80px;
-}
-.hero h1 {
-font-size: 52px;
-line-height: 1.2;
-background: linear-gradient(90deg, #ff9d00, #ff2a6d);
--webkit-background-clip: text;
-color: transparent;
-margin-bottom: 20px;
-letter-spacing: 1px;
-}
-.hero p {
-font-size: 18px;
-color: #aaa;
-max-width: 700px;
-line-height: 1.8;
-}
-/* 作品网格 */
-.grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-gap: 40px;
-}
-.card {
-background: #121216;
-border-radius: 20px;
-overflow: hidden;
-transition: all 0.5s ease;
-border: 1px solid rgba(255,255,255,0.06);
-}
-.card:hover {
-transform: translateY(-10px) scale(1.02);
-box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-border-color: rgba(255,130,0,0.3);
-}
-.card img {
-width: 100%;
-height: 240px;
-object-fit: cover;
-transition: 0.6s;
-}
-.card:hover img {
-transform: scale(1.1);
-filter: brightness(1.1);
-}
-.card .info {
-padding: 24px;
-}
-.card .tag {
-display: inline-block;
-padding: 4px 10px;
-background: rgba(255,140,0,0.15);
-color: #ff9d00;
-border-radius: 6px;
-font-size: 12px;
-margin-bottom: 10px;
-}
-.card h3 {
-font-size: 18px;
-margin-bottom: 8px;
-color: #fff;
-}
-.card .desc {
-font-size: 14px;
-color: #888;
-line-height: 1.6;
-}
-/* 底部 */
-footer {
-text-align: center;
-padding: 60px 6vw;
-color: #666;
-font-size: 14px;
-}
-/* 移动端 */
-@media (max-width:768px) {
-.hero h1 { font-size: 32px; }
-.grid { grid-template-columns: 1fr; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李东亮 - 品牌视觉设计师</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #121212 100%);
+            color: #FFFFFF;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #FF6B35, #F7931E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #CCCCCC;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #FF6B35;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FF6B35;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 首屏区域 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #FF6B35, #F7931E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #999999;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: #777777;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E);
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        /* 关于我区域 */
+        .about {
+            padding: 100px 0;
+            background: #0D0D0D;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666666;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .about-text p {
+            color: #888888;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .skill-tag {
+            padding: 8px 16px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 50px;
+            color: #FF6B35;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* 作品展示区域 */
+        .portfolio {
+            padding: 100px 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-card {
+            background: #1A1A1A;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-card:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 25px;
+        }
+
+        .portfolio-category {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(255, 107, 53, 0.1);
+            color: #FF6B35;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #FFFFFF;
+        }
+
+        .portfolio-desc {
+            color: #777777;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* 交互效果 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 鼠标光标效果 */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 107, 53, 0.5);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: overlay;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="bg-light"></div>
-<header>
-<div class="logo">DESIGN PORTFOLIO</div>
-</header>
-<div class="container">
-<section class="hero">
-<h1>品牌视觉设计<br/>全链路品牌体系创作</h1>
-<p>专注品牌VI、视觉传播、IP形象、新媒体视觉、线下空间与营销全案设计。追求统一、高级、可落地的品牌美学表达。</p>
-</section>
-<div class="grid">
-<!-- 作品1 -->
-<div class="card">
-<img src="https://picsum.photos/800/450?random=1" alt="品牌VI系统">
-<div class="info">
-<span class="tag">VI / 品牌系统</span>
-<h3>品牌全案VI体系设计</h3>
-<p class="desc">从品牌策略到视觉规范，构建LOGO、色彩、字体、IP形象及全域应用系统，实现线上线下统一视觉语言。</p>
-</div>
-</div>
-<!-- 作品2 -->
-<div class="card">
-<img src="https://picsum.photos/800/450?random=2" alt="IP设计">
-<div class="info">
-<span class="tag">IP / 形象</span>
-<h3>品牌IP形象与衍生设计</h3>
-<p class="desc">创作高识别度IP角色，延展表情包、周边、物料、空间视觉，强化品牌记忆点与传播性。</p>
-</div>
-</div>
-<!-- 作品3 -->
-<div class="card">
-<img src="https://picsum.photos/800/450?random=3" alt="营销视觉">
-<div class="info">
-<span class="tag">营销 / 传播</span>
-<h3>全渠道营销传播设计</h3>
-<p class="desc">海报、长图、户外广告、活动主视觉、展会物料，统一风格并实现高效转化。</p>
-</div>
-</div>
-<!-- 作品4 -->
-<div class="card">
-<img src="https://picsum.photos/800/450?random=4" alt="UI/小程序">
-<div class="info">
-<span class="tag">UI / 界面</span>
-<h3>小程序/APP界面设计</h3>
-<p class="desc">医疗、服务类产品UI，注重体验逻辑、视觉层次与品牌调性统一。</p>
-</div>
-</div>
-<!-- 作品5 -->
-<div class="card">
-<img src="https://picsum.photos/800/450?random=5" alt="新媒体">
-<div class="info">
-<span class="tag">新媒体 / 内容</span>
-<h3>社媒矩阵视觉体系</h3>
-<p class="desc">抖音、小红书、视频号内容视觉规范，封面、版式、短视频风格统一打造。</p>
-</div>
-</div>
-<!-- 作品6 -->
-<div class="card">
-<img src="https://picsum.photos/800/450?random=6" alt="线下空间">
-<div class="info">
-<span class="tag">空间 / 物料</span>
-<h3>门店与展会活动视觉</h3>
-<p class="desc">终端形象、灯箱、展会、发布会物料体系，强气场、强识别、强落地。</p>
-</div>
-</div>
-</div>
-</div>
-<footer>© 2026 DESIGN PORTFOLIO · ALL RIGHTS RESERVED</footer>
-<script>
-// 鼠标视差（可选酷炫效果）
-document.addEventListener('mousemove', (e) => {
-const light = document.querySelector('.bg-light');
-const x = e.clientX - 400;
-const y = e.clientY - 400;
-light.style.transform = `translate(${x}px, ${y}px)`;
-});
-</script>
+    <!-- 自定义光标 -->
+    <div class="cursor"></div>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">LIDONGLIANG</div>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#about">关于</a>
+                <a href="#portfolio">作品</a>
+                <a href="#contact">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首屏区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>你好，我是 <span>李东亮</span></h1>
+                <h2 class="hero-subtitle">品牌视觉设计师 | 全链路品牌体系构建</h2>
+                <p class="hero-desc">专注品牌VI、IP设计、营销视觉、UI界面与线下空间设计，用视觉语言传递品牌核心价值，打造统一且具有辨识度的品牌形象。</p>
+                <a href="#portfolio" class="btn">查看作品集</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我区域 -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>关于我</h2>
+                <p>5年品牌全链路设计经验，擅长从0到1搭建品牌视觉体系，覆盖品牌策略、视觉设计、营销传播全流程。</p>
+            </div>
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <h3>品牌视觉设计师</h3>
+                    <p>拥有5年品牌设计与管理经验，曾主导头部换电品牌、医疗科技品牌的全案VI设计与品牌升级，具备从品牌策略到视觉落地的全链路能力。</p>
+                    <p>精通品牌VI系统、IP形象设计、新媒体视觉、营销物料、展会空间、UI界面等全域设计，注重品牌统一性与传播效率，用设计驱动品牌增长。</p>
+                    <div class="skills">
+                        <span class="skill-tag">品牌VI设计</span>
+                        <span class="skill-tag">IP形象设计</span>
+                        <span class="skill-tag">营销视觉</span>
+                        <span class="skill-tag">UI界面设计</span>
+                        <span class="skill-tag">新媒体视觉</span>
+                        <span class="skill-tag">展会活动设计</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品展示区域 -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>精选作品</h2>
+                <p>涵盖品牌VI、IP设计、营销视觉、UI界面等全品类设计作品，展现专业设计能力与审美。</p>
+            </div>
+            <div class="portfolio-grid">
+                <!-- 作品1 -->
+                <div class="portfolio-card fade-in">
+                    <img src="https://picsum.photos/seed/vi1/600/400" alt="品牌VI设计" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <span class="portfolio-category">VI设计</span>
+                        <h3 class="portfolio-title">品牌全案VI体系设计</h3>
+                        <p class="portfolio-desc">从品牌策略到视觉规范，构建LOGO、色彩、字体、IP形象及全域应用系统。</p>
+                    </div>
+                </div>
+
+                <!-- 作品2 -->
+                <div class="portfolio-card fade-in">
+                    <img src="https://picsum.photos/seed/ip1/600/400" alt="IP形象设计" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <span class="portfolio-category">IP设计</span>
+                        <h3 class="portfolio-title">品牌IP形象与衍生设计</h3>
+                        <p class="portfolio-desc">创作高识别度IP角色，延展表情包、周边、物料、空间视觉，强化品牌记忆。</p>
+                    </div>
+                </div>
+
+                <!-- 作品3 -->
+                <div class="portfolio-card fade-in">
+                    <img src="https://picsum.photos/seed/market1/600/400" alt="营销视觉设计" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <span class="portfolio-category">营销视觉</span>
+                        <h3 class="portfolio-title">全渠道营销传播设计</h3>
+                        <p class="portfolio-desc">海报、长图、户外广告、活动主视觉、展会物料，统一风格高效转化。</p>
+                    </div>
+                </div>
+
+                <!-- 作品4 -->
+                <div class="portfolio-card fade-in">
+                    <img src="https://picsum.photos/seed/ui1/600/400" alt="UI界面设计" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <span class="portfolio-category">UI设计</span>
+                        <h3 class="portfolio-title">小程序/APP界面设计</h3>
+                        <p class="portfolio-desc">医疗、服务类产品UI，注重体验逻辑、视觉层次与品牌调性统一。</p>
+                    </div>
+                </div>
+
+                <!-- 作品5 -->
+                <div class="portfolio-card fade-in">
+                    <img src="https://picsum.photos/seed/social1/600/400" alt="新媒体视觉" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <span class="portfolio-category">新媒体</span>
+                        <h3 class="portfolio-title">社媒矩阵视觉体系</h3>
+                        <p class="portfolio-desc">抖音、小红书、视频号内容视觉规范，封面、版式、短视频风格统一。</p>
+                    </div>
+                </div>
+
+                <!-- 作品6 -->
+                <div class="portfolio-card fade-in">
+                    <img src="https://picsum.photos/seed/space1/600/400" alt="线下空间设计" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <span class="portfolio-category">空间物料</span>
+                        <h3 class="portfolio-title">门店与展会活动视觉</h3>
+                        <p class="portfolio-desc">终端形象、灯箱、展会、发布会物料体系，强气场、强识别、强落地。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 滚动渐入效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // 鼠标光标效果
+            const cursor = document.querySelector('.cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+            });
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
