@@ -702,6 +702,355 @@ a{color:inherit;text-decoration:none}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Li Dongliang — Brand Visual Designer</title>
+<style>
+/* ═══════════════════════════════════════════
+   L I   D O N G L I A N G  —  v5 CLEAN
+   NO preloader · System fonts fallback
+   ═══════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050505;--bg-soft:#0a0a0a;--bg-card:#0f0f0f;
+  --fg:#F0EDE6;--fg-dim:#5A554E;
+  --gold:#C4A35A;--gold-light:#DFC07A;
+  --serif:'Georgia','Noto Serif SC','Songti SC','STSong',serif;
+  --sans:-apple-system,'SF Pro Display','Helvetica Neue','PingFang SC',sans-serif;
+  --cn:'PingFang SC','STSong','Noto Serif CJK SC','Songti SC',serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);overflow-x:hidden;cursor:default}
+::selection{background:var(--gold);color:var(--bg)}
+a{color:inherit;text-decoration:none}
+
+/* ── Noise ── */
+.noise{position:fixed;inset:0;pointer-events:none;z-index:99999;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px}
+
+/* ── Cursor ── */
+.cd{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:100000;mix-blend-mode:difference;transition:transform .2s var(--ease),opacity .2s;transform:translate(-50%,-50%)}
+.cd.active{transform:translate(-50%,-50%) scale(6);opacity:.4}
+.cr{position:fixed;width:32px;height:32px;border:1px solid rgba(196,163,90,.18);border-radius:50%;pointer-events:none;z-index:99998;transition:width .45s var(--ease),height .45s var(--ease),border-color .45s;transform:translate(-50%,-50%)}
+.cr.active{width:60px;height:60px;border-color:rgba(196,163,90,.5)}
+@media(max-width:768px){.cd,.cr{display:none!important}body{cursor:auto}}
+
+/* ── Nav ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.6rem 3rem;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference}
+.nav-logo{font-family:var(--serif);font-size:.95rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#fff}
+.nav-menu{display:flex;gap:2.5rem;list-style:none}
+.nav-menu a{font-size:.58rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:#fff;position:relative;padding-bottom:2px}
+.nav-menu a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .5s var(--ease)}
+.nav-menu a:hover::after{width:100%}
+
+/* ── Music ── */
+.mt{position:fixed;bottom:2rem;right:2.5rem;z-index:1001;width:44px;height:44px;border:1px solid rgba(196,163,90,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;transition:all .4s var(--ease);mix-blend-mode:difference}
+.mt:hover{border-color:var(--gold);transform:scale(1.08)}
+.m-bars{display:flex;gap:2px;align-items:flex-end;height:14px}
+.m-bar{width:2.5px;background:var(--gold);border-radius:1px;animation:mPulse .8s ease-in-out infinite alternate}
+.m-bar:nth-child(1){height:40%;animation-delay:0s}.m-bar:nth-child(2){height:70%;animation-delay:.15s}.m-bar:nth-child(3){height:50%;animation-delay:.3s}.m-bar:nth-child(4){height:85%;animation-delay:.15s}
+.mt.paused .m-bar{animation:none;height:4px}
+@keyframes mPulse{to{height:95%}}
+
+/* ══ HERO ══ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 3rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;top:-10%;right:-5%;width:60vw;height:60vw;max-width:800px;max-height:800px;background:radial-gradient(ellipse at 25% 55%,rgba(196,163,90,.04) 0%,transparent 55%),radial-gradient(ellipse at 75% 30%,rgba(196,163,90,.025) 0%,transparent 45%);filter:blur(60px);animation:bgFloat 12s ease-in-out infinite alternate}
+@keyframes bgFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-20px,15px) scale(1.03);opacity:.7}}
+.hero-col{position:relative;z-index:2;max-width:1100px}
+.hl{display:block;overflow:hidden}
+.hero-name{font-family:var(--serif);font-weight:200;font-size:clamp(4rem,13vw,11rem);line-height:.88;letter-spacing:-.04em;color:var(--fg)}
+.hero-name span{display:inline-block;transform:translateY(108%);transition:transform 1.2s var(--ease)}
+.hero.reveal .hero-name span{transform:translateY(0)}
+.hero.reveal .hl:nth-child(2) span{transition-delay:.1s}
+.hero-cn{font-family:var(--cn);font-weight:200;font-size:clamp(1rem,2.2vw,1.9rem);letter-spacing:.4em;color:var(--gold);margin-top:1.2rem;opacity:0;transform:translateY(20px);transition:all .8s var(--ease) .4s}
+.hero.reveal .hero-cn{opacity:1;transform:translateY(0)}
+.hero-role{font-size:.58rem;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:var(--fg-dim);margin-top:2.5rem;opacity:0;transition:opacity .8s var(--ease) .7s}
+.hero.reveal .hero-role{opacity:1}
+.hero-scroll{position:absolute;bottom:2.5rem;left:3rem;display:flex;align-items:center;gap:.8rem;opacity:0;transition:opacity .8s var(--ease) 1.2s}
+.hero.reveal .hero-scroll{opacity:1}
+.scr-line{width:36px;height:1px;background:rgba(90,85,78,.25);position:relative;overflow:hidden}
+.scr-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--gold);animation:scrSlide 2.5s ease-in-out infinite}
+@keyframes scrSlide{0%{left:-100%}50%{left:0}100%{left:100%}}
+.scr-txt{font-size:.52rem;letter-spacing:.35em;text-transform:uppercase;color:var(--fg-dim)}
+
+/* ══ MARQUEE ══ */
+.marquee-wrap{overflow:hidden;white-space:nowrap;padding:3rem 0;border-top:1px solid rgba(90,85,78,.08);border-bottom:1px solid rgba(90,85,78,.08);margin:4rem 0}
+.marquee-track{display:inline-flex;animation:marquee 30s linear infinite}
+.marquee-item{font-family:var(--serif);font-weight:200;font-size:clamp(1.8rem,4vw,3.5rem);color:rgba(240,237,230,.06);padding:0 2rem;letter-spacing:.05em}
+.marquee-item span{color:var(--gold);opacity:.15;margin-right:1.5rem}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ══ SECTIONS ══ */
+.sec{padding:10rem 3rem;position:relative}
+.sec-tag{font-size:.52rem;font-weight:600;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:3.5rem;display:flex;align-items:center;gap:1.2rem}
+.sec-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
+
+/* ══ PHILOSOPHY ══ */
+.philo{min-height:60vh;display:flex;align-items:center}
+.philo-text{font-family:var(--cn);font-weight:200;font-size:clamp(1.3rem,2.8vw,2.3rem);line-height:2.1;color:var(--fg);max-width:720px}
+.philo-text em{font-style:normal;color:var(--gold);font-family:var(--serif);font-style:italic;font-weight:300}
+.philo-l{display:block;opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.philo-l.on{opacity:1;transform:translateY(0)}
+
+/* ══ WORKS ══ */
+.works-wrap{margin-top:4.5rem}
+.work-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.work-row:last-child{margin-bottom:0}
+.work{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:default;background:var(--bg-card)}
+.work-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1s var(--ease),filter .8s ease;filter:grayscale(.15)}
+.work:hover .work-img{transform:scale(1.06);filter:grayscale(0)}
+.wa-1{background:linear-gradient(135deg,#12100c 0%,#1e1810 40%,#140e0b 100%);position:relative}
+.wa-1::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 30% 35%,rgba(196,163,90,.12) 0%,transparent 50%),radial-gradient(circle at 70% 65%,rgba(196,163,90,.06) 0%,transparent 40%)}
+.wa-2{background:linear-gradient(145deg,#0b1014 0%,#131c26 40%,#0a0e13 100%);position:relative}
+.wa-2::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 60% 30%,rgba(120,150,190,.09) 0%,transparent 48%),radial-gradient(circle at 25% 75%,rgba(120,150,190,.05) 0%,transparent 38%)}
+.wa-3{background:linear-gradient(160deg,#130d0d 0%,#201416 40%,#0f0a0b 100%);position:relative}
+.wa-3::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 45% 55%,rgba(190,130,130,.09) 0%,transparent 46%),conic-gradient(from 180deg at 80% 20%,transparent,rgba(190,130,130,.03),transparent)}
+.wa-4{background:linear-gradient(140deg,#0d120b 0%,#162010 40%,#0a0f08 100%);position:relative}
+.wa-4::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 35% 65%,rgba(140,185,120,.08) 0%,transparent 44%),linear-gradient(45deg,transparent 40%,rgba(140,185,120,.02) 50%,transparent 60%)}
+.w-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.94) 0%,rgba(5,5,5,.2) 45%,transparent 100%);transition:opacity .5s;opacity:.8}
+.work:hover .w-shade{opacity:1}
+.w-no{position:absolute;top:1.5rem;right:2rem;font-family:var(--serif);font-weight:200;font-size:5rem;color:rgba(196,163,90,.05);line-height:1;transition:color .5s}
+.work:hover .w-no{color:rgba(196,163,90,.12)}
+.w-info{position:absolute;bottom:0;left:0;right:0;padding:2rem;transform:translateY(14px);opacity:0;transition:all .55s var(--ease)}
+.work:hover .w-info{transform:translateY(0);opacity:1}
+.w-cat{font-size:.54rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.w-title{font-family:var(--serif);font-size:clamp(1.15rem,1.6vw,1.5rem);font-weight:400;color:var(--fg);margin-bottom:.3rem}
+.w-year{font-size:.6rem;letter-spacing:.12em;color:var(--fg-dim)}
+
+/* ══ ABOUT ══ */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:7rem;align-items:center}
+.about-vis{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-soft)}
+.about-vis-inner{position:absolute;inset:0;background:linear-gradient(155deg,#12100c 0%,#1e1812 50%,#14100c 100%);display:flex;align-items:center;justify-content:center}
+.about-orb{width:60%;height:60%;background:radial-gradient(circle,rgba(196,163,90,.07) 0%,transparent 65%);border-radius:40% 60% 60% 40%/50% 50% 50% 50%;animation:orbMorph 22s ease-in-out infinite;border:1px solid rgba(196,163,90,.05)}
+@keyframes orbMorph{0%,100%{border-radius:40% 60% 60% 40%/50% 50% 50% 50%;transform:rotate(0) scale(1)}25%{border-radius:55% 45% 70% 30%/60% 40% 60% 40%}50%{border-radius:45% 55% 35% 65%/55% 45% 55% 45%;transform:rotate(3deg) scale(1.02)}75%{border-radius:60% 40% 45% 55%/40% 60% 40% 60%}}
+.about-frame{position:absolute;inset:1rem;border:1px solid rgba(196,163,90,.05);pointer-events:none}
+.about-glyph{position:absolute;bottom:1.5rem;right:1.5rem;font-family:var(--serif);font-weight:200;font-size:5rem;color:rgba(196,163,90,.04);line-height:1}
+.about-text{max-width:480px}
+.about-bio{font-family:var(--cn);font-weight:200;font-size:1.25rem;line-height:2.1;color:var(--fg);margin-bottom:2rem}
+.about-desc{font-size:.76rem;line-height:2.1;color:var(--fg-dim);margin-bottom:2.5rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding-top:2rem;border-top:1px solid rgba(90,85,78,.1)}
+.as-n{font-family:var(--serif);font-weight:200;font-size:2.2rem;color:var(--gold);line-height:1;margin-bottom:.3rem}
+.as-k{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-dim)}
+
+/* ══ SERVICES ══ */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(90,85,78,.1);border-left:1px solid rgba(90,85,78,.1);margin-top:4rem}
+.svc{background:var(--bg);padding:3rem 2rem;border-right:1px solid rgba(90,85,78,.1);border-bottom:1px solid rgba(90,85,78,.1);position:relative;overflow:hidden;transition:background .5s}
+.svc:hover{background:var(--bg-soft)}
+.svc::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--gold);transition:width .6s var(--ease)}
+.svc:hover::before{width:100%}
+.svc-no{font-family:var(--serif);font-weight:200;font-size:2.8rem;color:rgba(196,163,90,.07);line-height:1;margin-bottom:1.5rem;transition:color .5s}
+.svc:hover .svc-no{color:rgba(196,163,90,.14)}
+.svc-t{font-family:var(--cn);font-size:1.1rem;font-weight:400;color:var(--fg);margin-bottom:.7rem}
+.svc-d{font-size:.7rem;line-height:1.9;color:var(--fg-dim);letter-spacing:.01em}
+
+/* ══ CONTACT ══ */
+.contact-sec{min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+.contact-h{font-family:var(--serif);font-weight:200;font-size:clamp(2.8rem,8vw,7.5rem);line-height:1.05;letter-spacing:-.03em;color:var(--fg);margin-bottom:1.2rem}
+.contact-h em{font-style:italic;color:var(--gold);font-weight:300}
+.contact-sub{font-family:var(--cn);font-weight:200;font-size:1rem;color:var(--fg-dim);margin-bottom:3rem;letter-spacing:.1em}
+.contact-btn{display:inline-flex;align-items:center;gap:1.2rem;padding:1.1rem 2.6rem;border:1px solid var(--gold);color:var(--gold);font-size:.62rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;transition:all .5s var(--ease);position:relative;overflow:hidden}
+.contact-btn::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform .5s var(--ease)}
+.contact-btn:hover{color:var(--bg)}.contact-btn:hover::before{transform:translateX(0)}
+.contact-btn>*{position:relative;z-index:1}
+.c-arrow{transition:transform .4s var(--ease)}.contact-btn:hover .c-arrow{transform:translateX(5px)}
+
+/* ══ FOOTER ══ */
+.footer{padding:2.2rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(90,85,78,.08)}
+.f-copy{font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-dim)}
+.f-links{display:flex;gap:2rem}
+.f-links a{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-dim);transition:color .3s}
+.f-links a:hover{color:var(--gold)}
+
+/* ══ Reveal ── */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.show{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.06s}.d2{transition-delay:.14s}.d3{transition-delay:.22s}.d4{transition-delay:.3s}.d5{transition-delay:.38s}.d6{transition-delay:.46s}
+
+/* ══ Responsive ── */
+@media(max-width:1024px){
+  .work-row{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:4rem}
+  .about-vis{max-width:360px}
+}
+@media(max-width:768px){
+  .nav{padding:1.2rem 1.5rem}.nav-menu{gap:1.4rem}
+  .sec{padding:6.5rem 1.5rem}.hero{padding:0 1.5rem}
+  .svc-grid{grid-template-columns:1fr}
+  .about-stats{gap:1rem}
+  .footer{flex-direction:column;gap:1.2rem;text-align:center;padding:2rem 1.5rem}
+  .mt{bottom:1.5rem;right:1.5rem;width:38px;height:38px}
+  .hero-scroll{left:1.5rem;bottom:2rem}
+}
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="cd" id="cd"></div><div class="cr" id="cr"></div>
+
+<nav class="nav" id="nv">
+  <a class="nav-logo">LDL</a>
+  <ul class="nav-menu">
+    <li><a href="#works">Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="mt paused" id="mt" title="Background Music">
+  <div class="m-bars"><div class="m-bar"></div><div class="m-bar"></div><div class="m-bar"></div><div class="m-bar"></div></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-col">
+    <h1 class="hero-name">
+      <span class="hl"><span>LI</span></span>
+      <span class="hl"><span>DONGLIANG</span></span>
+    </h1>
+    <p class="hero-cn">李 东 亮</p>
+    <p class="hero-role">Brand Visual Designer &amp; Creative Director</p>
+  </div>
+  <div class="hero-scroll"><div class="scr-line"></div><span class="scr-txt">Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Brand Identity<span>✦</span>Visual System<span>✦</span>IP Design<span>✦</span>Creative Direction<span>✦</span>Art Direction<span>✦</span>Spatial Design<span>✦</span>Digital Experience<span>✦</span></span>
+    <span class="marquee-item">Brand Identity<span>✦</span>Visual System<span>✦</span>IP Design<span>✦</span>Creative Direction<span>✦</span>Art Direction<span>✦</span>Spatial Design<span>✦</span>Digital Experience<span>✦</span></span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="sec philo">
+  <div>
+    <div class="sec-tag rv">Design Philosophy</div>
+    <p class="philo-text" id="pt">
+      <span class="philo-l">设计不是装饰，而是<em>意义的视觉化</em>。</span>
+      <span class="philo-l">每一个品牌都有其独特的灵魂，我的工作是将这份灵魂翻译成可以被感知、被记忆、被传播的视觉语言。</span>
+      <span class="philo-l">从策略到落地，让设计<em>驱动品牌增长</em>。</span>
+    </p>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="sec" id="works">
+  <div class="sec-tag rv">Selected Works</div>
+  <div class="works-wrap">
+    <div class="work-row">
+      <div class="work rv d1" data-cursor>
+        <div class="work-img wa-1"></div><div class="w-shade"></div><div class="w-no">01</div>
+        <div class="w-info"><div class="w-cat">Brand Identity</div><div class="w-title">头部换电品牌全案升级</div><div class="w-year">2024</div></div>
+      </div>
+      <div class="work rv d2" data-cursor style="margin-top:3rem">
+        <div class="work-img wa-2"></div><div class="w-shade"></div><div class="w-no">02</div>
+        <div class="w-info"><div class="w-cat">IP Character Design</div><div class="w-title">科技品牌IP角色系统</div><div class="w-year">2024</div></div>
+      </div>
+    </div>
+    <div class="work-row">
+      <div class="work rv d3" data-cursor style="margin-top:-1.5rem">
+        <div class="work-img wa-3"></div><div class="w-shade"></div><div class="w-no">03</div>
+        <div class="w-info"><div class="w-cat">Campaign Visual</div><div class="w-title">医疗科技品牌视觉体系</div><div class="w-year">2023</div></div>
+      </div>
+      <div class="work rv d4" data-cursor>
+        <div class="work-img wa-4"></div><div class="w-shade"></div><div class="w-no">04</div>
+        <div class="w-info"><div class="w-cat">Digital Content</div><div class="w-title">社交平台品牌内容矩阵</div><div class="w-year">2023</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="about-grid">
+    <div class="about-vis rv">
+      <div class="about-vis-inner"><div class="about-orb"></div></div>
+      <div class="about-frame"></div>
+      <div class="about-glyph">V</div>
+    </div>
+    <div class="about-text">
+      <div class="sec-tag rv d1">About</div>
+      <p class="about-bio rv d2">5年品牌视觉设计与管理经验，专注从品牌策略到视觉落地的全链路设计。用设计驱动品牌增长。</p>
+      <p class="about-desc rv d3">曾主导头部换电品牌、医疗科技品牌的全案VI设计与品牌升级。精通品牌VI系统、IP形象设计、新媒体视觉、营销物料、展会空间、UI界面等全域设计，注重品牌统一性与传播效率。</p>
+      <div class="about-stats rv d4">
+        <div><div class="as-n">5+</div><div class="as-k">Years</div></div>
+        <div><div class="as-n">30+</div><div class="as-k">Projects</div></div>
+        <div><div class="as-n">6</div><div class="as-k">Disciplines</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="sec-tag rv">Expertise</div>
+  <div class="svc-grid">
+    <div class="svc rv d1" data-cursor><div class="svc-no">01</div><div class="svc-t">品牌VI设计</div><div class="svc-d">从品牌策略到视觉系统的全案设计，构建完整统一的品牌识别体系</div></div>
+    <div class="svc rv d2" data-cursor><div class="svc-no">02</div><div class="svc-t">IP形象设计</div><div class="svc-d">打造独特的品牌IP角色，建立品牌与用户之间的情感连接</div></div>
+    <div class="svc rv d3" data-cursor><div class="svc-no">03</div><div class="svc-t">营销视觉</div><div class="svc-d">营销活动的视觉策略与执行，让每一次传播都精准有力</div></div>
+    <div class="svc rv d4" data-cursor><div class="svc-no">04</div><div class="svc-t">UI界面设计</div><div class="svc-d">数字产品的界面设计，兼顾美学与用户体验</div></div>
+    <div class="svc rv d5" data-cursor><div class="svc-no">05</div><div class="svc-t">新媒体视觉</div><div class="svc-d">社交平台视觉内容体系，让品牌在线上持续发声</div></div>
+    <div class="svc rv d6" data-cursor><div class="svc-no">06</div><div class="svc-t">展会活动设计</div><div class="svc-d">线下活动的空间视觉与物料设计，打造沉浸式品牌体验</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact-sec" id="contact">
+  <div class="sec-tag rv" style="justify-content:center">Get in Touch</div>
+  <h2 class="contact-h rv d1">Let's create<br><em>together</em></h2>
+  <p class="contact-sub rv d2">期待与你的每一次合作</p>
+  <a href="mailto:hello@lidongliang.art" class="contact-btn rv d3" data-cursor><span>hello@lidongliang.art</span><span class="c-arrow">→</span></a>
+</section>
+
+<footer class="footer">
+  <div class="f-copy">© 2025 Li Dongliang. All rights reserved.</div>
+  <div class="f-links"><a href="#">Instagram</a><a href="#">Behance</a><a href="#">WeChat</a></div>
+</footer>
+
+<audio id="bgm" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+(function(){
+  /* ── Hero reveal on load (NO preloader) ── */
+  setTimeout(function(){
+    document.getElementById('hero').classList.add('reveal');
+  }, 100);
+
+  /* ── Cursor ── */
+  var cd=document.getElementById('cd'),cr=document.getElementById('cr');
+  var mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+  (function loop(){cx+=(mx-cx)*.1;cy+=(my-cy)*.1;cr.style.left=cx+'px';cr.style.top=cy+'px';requestAnimationFrame(loop)})();
+  document.querySelectorAll('[data-cursor]').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cd.classList.add('active');cr.classList.add('active')});
+    el.addEventListener('mouseleave',function(){cd.classList.remove('active');cr.classList.remove('active')});
+  });
+
+  /* ── Scroll Reveal ── */
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('show')})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){obs.observe(el)});
+
+  /* ── Philosophy line-by-line reveal ── */
+  var pObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var lines=e.target.querySelectorAll('.philo-l');lines.forEach(function(l,i){setTimeout(function(){l.classList.add('on')},i*280)})}})},{threshold:.3});
+  pObs.observe(document.getElementById('pt'));
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+
+  /* ── Music toggle ── */
+  var mt=document.getElementById('mt'),bgm=document.getElementById('bgm');
+  mt.addEventListener('click',function(){if(bgm.paused){bgm.play().then(function(){mt.classList.remove('paused')}).catch(function(){})}else{bgm.pause();mt.classList.add('paused')}});
+})();
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Li Dongliang — Brand Visual Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@100;200;300;400;500;600;700;900&display=swap" rel="stylesheet">
