@@ -1,6 +1,1280 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李东亮 — 品牌视觉设计师</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   VOID — A Portfolio for Li Dongliang
+   Concept: The Art of Negative Space
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0C0C0C;
+  --bg-elevated: #141414;
+  --fg: #E8E0D6;
+  --fg-muted: #6B6560;
+  --accent: #C4A882;
+  --accent-light: #E8D5B5;
+  --accent-dark: #8B7A5E;
+  --serif: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+  --sans: 'Syne', 'Helvetica Neue', sans-serif;
+  --cn-serif: 'Noto Serif SC', 'Cormorant Garamond', Georgia, serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ─── Custom Cursor ─── */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  transition: transform 0.3s var(--ease-out-expo), opacity 0.3s;
+  transform: translate(-50%, -50%);
+}
+
+.cursor.hover {
+  transform: translate(-50%, -50%) scale(4);
+  opacity: 0.6;
+}
+
+.cursor-trail {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(196, 168, 130, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.6s var(--ease-out-expo), width 0.4s, height 0.4s, border-color 0.4s;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-trail.hover {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(196, 168, 130, 0.4);
+}
+
+/* ─── Preloader ─── */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.8s var(--ease-out-expo), visibility 0.8s;
+}
+
+.preloader.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-counter {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 300;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.preloader-line {
+  width: 120px;
+  height: 1px;
+  background: var(--fg-muted);
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.preloader-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 2s linear;
+}
+
+.preloader.loading .preloader-line::after {
+  width: 100%;
+}
+
+/* ─── Navigation ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.4s var(--ease-out-expo);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ─── Hero Section ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  background: radial-gradient(ellipse at 30% 50%, rgba(196,168,130,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(196,168,130,0.04) 0%, transparent 50%);
+  filter: blur(60px);
+  animation: heroGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-30px, 20px) scale(1.05); opacity: 0.7; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  overflow: hidden;
+}
+
+.hero-name .line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-name .line span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1.2s var(--ease-out-expo);
+}
+
+.hero-name .line:nth-child(2) span {
+  transition-delay: 0.15s;
+}
+
+.hero.revealed .hero-name .line span {
+  transform: translateY(0);
+}
+
+.hero-cn-name {
+  font-family: var(--cn-serif);
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 200;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-top: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s var(--ease-out-expo) 0.5s;
+}
+
+.hero.revealed .hero-cn-name {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-role {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-top: 2.5rem;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out-expo) 0.8s;
+}
+
+.hero.revealed .hero-role {
+  opacity: 1;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out-expo) 1.2s;
+}
+
+.hero.revealed .hero-scroll-hint {
+  opacity: 1;
+}
+
+.scroll-line {
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--fg);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0% { left: -100%; }
+  50% { left: 0; }
+  100% { left: 100%; }
+}
+
+.scroll-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ─── Section Common ─── */
+.section {
+  padding: 10rem 3rem;
+  position: relative;
+}
+
+.section-label {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ─── Philosophy Section ─── */
+.philosophy {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.philosophy-text {
+  font-family: var(--cn-serif);
+  font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--fg);
+  max-width: 800px;
+}
+
+.philosophy-text em {
+  font-style: italic;
+  color: var(--accent);
+  font-family: var(--serif);
+}
+
+.philosophy-text .word {
+  display: inline-block;
+  opacity: 0.08;
+  transition: opacity 0.5s ease;
+}
+
+.philosophy-text .word.visible {
+  opacity: 1;
+}
+
+/* ─── Works Section ─── */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.work-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--bg-elevated);
+  cursor: none;
+}
+
+.work-card:nth-child(2) {
+  margin-top: 4rem;
+}
+
+.work-card:nth-child(3) {
+  margin-top: -4rem;
+}
+
+.work-card-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.work-card:hover .work-card-bg {
+  transform: scale(1.05);
+}
+
+.work-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(12,12,12,0.9) 0%, rgba(12,12,12,0.2) 50%, transparent 100%);
+  transition: opacity 0.5s;
+  opacity: 0.7;
+}
+
+.work-card:hover .work-card-overlay {
+  opacity: 1;
+}
+
+.work-card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.5s var(--ease-out-expo);
+}
+
+.work-card:hover .work-card-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.work-card-category {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.work-card-title {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+
+.work-card-year {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--fg-muted);
+}
+
+.work-card-number {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  font-family: var(--serif);
+  font-size: 5rem;
+  font-weight: 300;
+  color: rgba(196,168,130,0.08);
+  line-height: 1;
+  transition: color 0.5s;
+}
+
+.work-card:hover .work-card-number {
+  color: rgba(196,168,130,0.15);
+}
+
+/* ─── Work Card Background Art ─── */
+.work-bg-1 {
+  background: linear-gradient(135deg, #1a1612 0%, #2a2018 40%, #1a1410 100%);
+  position: relative;
+}
+.work-bg-1::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(196,168,130,0.15) 0%, transparent 70%);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morphShape 12s ease-in-out infinite;
+}
+
+.work-bg-2 {
+  background: linear-gradient(160deg, #0f1418 0%, #141a20 40%, #0c1014 100%);
+  position: relative;
+}
+.work-bg-2::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(circle, rgba(130,160,196,0.12) 0%, transparent 70%);
+  border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+  animation: morphShape 15s ease-in-out infinite reverse;
+}
+
+.work-bg-3 {
+  background: linear-gradient(145deg, #14100f 0%, #1e1418 40%, #100c0e 100%);
+  position: relative;
+}
+.work-bg-3::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(196,130,140,0.12) 0%, transparent 70%);
+  border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+  animation: morphShape 10s ease-in-out infinite;
+}
+
+.work-bg-4 {
+  background: linear-gradient(130deg, #10140f 0%, #1a2014 40%, #0c100c 100%);
+  position: relative;
+}
+.work-bg-4::before {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(140,196,130,0.12) 0%, transparent 70%);
+  border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+  animation: morphShape 14s ease-in-out infinite reverse;
+}
+
+@keyframes morphShape {
+  0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
+  25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+  50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; transform: rotate(5deg) scale(1.02); }
+  75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+}
+
+/* ─── Services Section ─── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(107,101,96,0.15);
+  margin-top: 4rem;
+}
+
+.service-item {
+  background: var(--bg);
+  padding: 3.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.5s;
+}
+
+.service-item:hover {
+  background: var(--bg-elevated);
+}
+
+.service-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.6s var(--ease-out-expo);
+}
+
+.service-item:hover::before {
+  width: 100%;
+}
+
+.service-number {
+  font-family: var(--serif);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(196,168,130,0.1);
+  line-height: 1;
+  margin-bottom: 2rem;
+  transition: color 0.5s;
+}
+
+.service-item:hover .service-number {
+  color: rgba(196,168,130,0.2);
+}
+
+.service-title {
+  font-family: var(--cn-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 1rem;
+}
+
+.service-desc {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--fg-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ─── About Section ─── */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+
+.about-visual-inner {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a1612 0%, #2a2018 50%, #1a1410 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-visual-shape {
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(196,168,130,0.1) 0%, transparent 70%);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morphShape 20s ease-in-out infinite;
+  border: 1px solid rgba(196,168,130,0.08);
+}
+
+.about-visual-frame {
+  position: absolute;
+  inset: 1.5rem;
+  border: 1px solid rgba(196,168,130,0.08);
+  pointer-events: none;
+}
+
+.about-visual-label {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  font-family: var(--serif);
+  font-size: 5rem;
+  font-weight: 300;
+  color: rgba(196,168,130,0.06);
+  line-height: 1;
+}
+
+.about-content {
+  max-width: 500px;
+}
+
+.about-intro {
+  font-family: var(--cn-serif);
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--fg);
+  margin-bottom: 2.5rem;
+}
+
+.about-detail {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  line-height: 2;
+  color: var(--fg-muted);
+  margin-bottom: 3rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(107,101,96,0.2);
+}
+
+.stat-number {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ─── Contact Section ─── */
+.contact {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-heading {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  margin-bottom: 2rem;
+}
+
+.contact-heading em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.contact-sub {
+  font-family: var(--cn-serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--fg-muted);
+  margin-bottom: 3rem;
+  letter-spacing: 0.1em;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.2rem 3rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: all 0.5s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-101%);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.contact-btn:hover {
+  color: var(--bg);
+}
+
+.contact-btn:hover::before {
+  transform: translateX(0);
+}
+
+.contact-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-btn-arrow {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.contact-btn:hover .contact-btn-arrow {
+  transform: translateX(5px);
+}
+
+/* ─── Footer ─── */
+footer {
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(107,101,96,0.15);
+}
+
+.footer-left {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.footer-right {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.footer-right a {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-right a:hover {
+  color: var(--accent);
+}
+
+/* ─── Scroll Reveal Animations ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* ─── Mobile Responsive ─── */
+@media (max-width: 1024px) {
+  .works-grid {
+    grid-template-columns: 1fr;
+  }
+  .work-card:nth-child(2),
+  .work-card:nth-child(3) {
+    margin-top: 0;
+  }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-visual {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 1.5rem;
+  }
+  .nav-links {
+    gap: 1.5rem;
+  }
+  .section {
+    padding: 6rem 1.5rem;
+  }
+  .hero {
+    padding: 0 1.5rem;
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  footer {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .cursor, .cursor-trail {
+    display: none;
+  }
+  body {
+    cursor: auto;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- Preloader -->
+<div class="preloader loading" id="preloader">
+  <div class="preloader-counter" id="preloaderCounter">0</div>
+  <div class="preloader-line"></div>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <a href="#" class="nav-logo" data-hover>LDL</a>
+  <ul class="nav-links">
+    <li><a href="#works" data-hover>Works</a></li>
+    <li><a href="#about" data-hover>About</a></li>
+    <li><a href="#contact" data-hover>Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-name">
+      <span class="line"><span>LI</span></span>
+      <span class="line"><span>DONGLIANG</span></span>
+    </h1>
+    <p class="hero-cn-name">李 东 亮</p>
+    <p class="hero-role">Brand Visual Designer</p>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- Philosophy -->
+<section class="section philosophy" id="philosophy">
+  <div>
+    <div class="section-label reveal">Design Philosophy</div>
+    <p class="philosophy-text" id="philosophyText">
+      设计不是装饰，而是<em>意义的视觉化</em>。每一个品牌都有其独特的灵魂，我的工作是将这份灵魂翻译成可以被感知、被记忆、被传播的视觉语言。从策略到落地，让设计<em>驱动品牌增长</em>。
+    </p>
+  </div>
+</section>
+
+<!-- Works -->
+<section class="section" id="works">
+  <div class="section-label reveal">Selected Works</div>
+  <div class="works-grid">
+    <div class="work-card reveal reveal-delay-1" data-hover>
+      <div class="work-card-bg work-bg-1"></div>
+      <div class="work-card-overlay"></div>
+      <div class="work-card-number">01</div>
+      <div class="work-card-info">
+        <div class="work-card-category">品牌VI设计</div>
+        <div class="work-card-title">头部换电品牌全案升级</div>
+        <div class="work-card-year">2024</div>
+      </div>
+    </div>
+    <div class="work-card reveal reveal-delay-2" data-hover>
+      <div class="work-card-bg work-bg-2"></div>
+      <div class="work-card-overlay"></div>
+      <div class="work-card-number">02</div>
+      <div class="work-card-info">
+        <div class="work-card-category">IP形象设计</div>
+        <div class="work-card-title">科技品牌IP角色系统</div>
+        <div class="work-card-year">2024</div>
+      </div>
+    </div>
+    <div class="work-card reveal reveal-delay-3" data-hover>
+      <div class="work-card-bg work-bg-3"></div>
+      <div class="work-card-overlay"></div>
+      <div class="work-card-number">03</div>
+      <div class="work-card-info">
+        <div class="work-card-category">营销视觉</div>
+        <div class="work-card-title">医疗科技品牌视觉体系</div>
+        <div class="work-card-year">2023</div>
+      </div>
+    </div>
+    <div class="work-card reveal reveal-delay-4" data-hover>
+      <div class="work-card-bg work-bg-4"></div>
+      <div class="work-card-overlay"></div>
+      <div class="work-card-number">04</div>
+      <div class="work-card-info">
+        <div class="work-card-category">新媒体视觉</div>
+        <div class="work-card-title">社交平台品牌内容矩阵</div>
+        <div class="work-card-year">2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="about">
+    <div class="about-visual reveal">
+      <div class="about-visual-inner">
+        <div class="about-visual-shape"></div>
+      </div>
+      <div class="about-visual-frame"></div>
+      <div class="about-visual-label">V</div>
+    </div>
+    <div class="about-content">
+      <div class="section-label reveal">About</div>
+      <p class="about-intro reveal reveal-delay-1">
+        5年品牌视觉设计与管理经验，专注从品牌策略到视觉落地的全链路设计。用设计驱动品牌增长。
+      </p>
+      <p class="about-detail reveal reveal-delay-2">
+        曾主导头部换电品牌、医疗科技品牌的全案VI设计与品牌升级。精通品牌VI系统、IP形象设计、新媒体视觉、营销物料、展会空间、UI界面等全域设计，注重品牌统一性与传播效率。
+      </p>
+      <div class="about-stats reveal reveal-delay-3">
+        <div>
+          <div class="stat-number">5+</div>
+          <div class="stat-label">年经验</div>
+        </div>
+        <div>
+          <div class="stat-number">30+</div>
+          <div class="stat-label">品牌项目</div>
+        </div>
+        <div>
+          <div class="stat-number">6</div>
+          <div class="stat-label">设计领域</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section" id="services">
+  <div class="section-label reveal">Expertise</div>
+  <div class="services-grid">
+    <div class="service-item reveal reveal-delay-1" data-hover>
+      <div class="service-number">01</div>
+      <div class="service-title">品牌VI设计</div>
+      <div class="service-desc">从品牌策略到视觉系统的全案设计，构建完整统一的品牌视觉识别体系</div>
+    </div>
+    <div class="service-item reveal reveal-delay-2" data-hover>
+      <div class="service-number">02</div>
+      <div class="service-title">IP形象设计</div>
+      <div class="service-desc">打造独特的品牌IP角色，建立品牌与用户之间的情感连接</div>
+    </div>
+    <div class="service-item reveal reveal-delay-3" data-hover>
+      <div class="service-number">03</div>
+      <div class="service-title">营销视觉</div>
+      <div class="service-desc">营销活动的视觉策略与执行，让每一次传播都精准有力</div>
+    </div>
+    <div class="service-item reveal reveal-delay-4" data-hover>
+      <div class="service-number">04</div>
+      <div class="service-title">UI界面设计</div>
+      <div class="service-desc">数字产品的界面设计，兼顾美学与用户体验</div>
+    </div>
+    <div class="service-item reveal reveal-delay-5" data-hover>
+      <div class="service-number">05</div>
+      <div class="service-title">新媒体视觉</div>
+      <div class="service-desc">社交平台视觉内容体系，让品牌在线上持续发声</div>
+    </div>
+    <div class="service-item reveal reveal-delay-6" data-hover>
+      <div class="service-number">06</div>
+      <div class="service-title">展会活动设计</div>
+      <div class="service-desc">线下活动的空间视觉与物料设计，打造沉浸式品牌体验</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <div class="section-label reveal" style="justify-content: center;">Get in Touch</div>
+  <h2 class="contact-heading reveal reveal-delay-1">
+    Let's create<br><em>together</em>
+  </h2>
+  <p class="contact-sub reveal reveal-delay-2">期待与你的每一次合作</p>
+  <a href="mailto:hello@lidongliang.art" class="contact-btn reveal reveal-delay-3" data-hover>
+    <span>hello@lidongliang.art</span>
+    <span class="contact-btn-arrow">→</span>
+  </a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-left">© 2024 Li Dongliang. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="#" data-hover>Instagram</a>
+    <a href="#" data-hover>Behance</a>
+    <a href="#" data-hover>微信</a>
+  </div>
+</footer>
+
+<script>
+// ─── Preloader ───
+(function() {
+  const counter = document.getElementById('preloaderCounter');
+  const preloader = document.getElementById('preloader');
+  let count = 0;
+  const interval = setInterval(() => {
+    count += Math.floor(Math.random() * 3) + 1;
+    if (count >= 100) {
+      count = 100;
+      clearInterval(interval);
+      setTimeout(() => {
+        preloader.classList.add('done');
+        document.getElementById('hero').classList.add('revealed');
+      }, 400);
+    }
+    counter.textContent = count;
+  }, 30);
+})();
+
+// ─── Custom Cursor ───
+(function() {
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  let mx = 0, my = 0, cx = 0, cy = 0, tx = 0, ty = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateTrail() {
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    trail.style.left = cx + 'px';
+    trail.style.top = cy + 'px';
+    requestAnimationFrame(animateTrail);
+  }
+  animateTrail();
+
+  document.querySelectorAll('[data-hover]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hover');
+      trail.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hover');
+      trail.classList.remove('hover');
+    });
+  });
+})();
+
+// ─── Scroll Reveal ───
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+
+// ─── Philosophy Text Word Reveal ───
+(function() {
+  const textEl = document.getElementById('philosophyText');
+  const html = textEl.innerHTML;
+  // Split text into words but preserve HTML tags
+  const words = html.split(/(?<=>|^)([^<]+)(?=<|$)/);
+  let processed = '';
+  let inTag = false;
+  let buffer = '';
+
+  // Simple approach: wrap each text segment
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+
+  function wrapTextNodes(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent;
+      const words = text.split(/(\s+)/);
+      const fragment = document.createDocumentFragment();
+      words.forEach(word => {
+        if (word.trim()) {
+          const span = document.createElement('span');
+          span.className = 'word';
+          span.textContent = word;
+          fragment.appendChild(span);
+        } else {
+          fragment.appendChild(document.createTextNode(word));
+        }
+      });
+      return fragment;
+    }
+    return null;
+  }
+
+  function processNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return wrapTextNodes(node);
+    }
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const clone = node.cloneNode(false);
+      node.childNodes.forEach(child => {
+        const result = processNode(child);
+        if (result) clone.appendChild(result);
+      });
+      return clone;
+    }
+    return null;
+  }
+
+  const newContent = processNode(tempDiv);
+  textEl.innerHTML = '';
+  textEl.appendChild(newContent);
+
+  // Observe words
+  const wordObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.5, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.philosophy-text .word').forEach((word, i) => {
+    word.style.transitionDelay = (i * 0.03) + 's';
+    wordObserver.observe(word);
+  });
+})();
+
+// ─── Smooth Anchor Scroll ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>李东亮 - 品牌视觉设计师</title>
